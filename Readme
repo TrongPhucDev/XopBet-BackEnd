@@ -1,0 +1,6 @@
+# Get All Product in cart-method = GET: localhost:5000/api/cart/ (Ko đầu vào)
+# Add to cart-method = POST: localhost:5000/api/cart/addToCart (Đầu vào là id product)
+# Get User Info - method = GET: localhost:5000/api/users/getme (Ko dau vao)
+# update mai t lam
+
+# Code push on 12/9/2022
