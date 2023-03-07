@@ -7,10 +7,7 @@ import { Pets } from '../../entity/pets.entity'
 import HttpException from '../../utils/HttpException'
 
 export class UsersController {
-    static GetMe = async (
-        req: Request,
-        res: Response
-    ): Promise<Users | any> => {
+    async GetMe(req: Request, res: Response): Promise<Users | any> {
         try {
             const userId = Number(res.locals.jwtPayload.id)
             console.log(userId)
@@ -27,16 +24,13 @@ export class UsersController {
         }
     }
 
-    static GetCurrentUserId = async (res: Response): Promise<Users['id']> => {
+    async GetCurrentUserId(res: Response): Promise<Users['id']> {
         const userId: number = Number(res.locals.jwtPayload.id)
         if (!userId) res.status(401).json('User id is required, Please Login!')
         return userId
     }
 
-    static GetAllPetPost = async (
-        req: Request,
-        res: Response
-    ): Promise<Users | any> => {
+    async GetAllPetPost(req: Request, res: Response): Promise<Users | any> {
         try {
             const userId: number = Number(res.locals.jwtPayload.id)
             const postId: number = Number(req.params.id)
@@ -52,10 +46,7 @@ export class UsersController {
             console.log(error)
         }
     }
-    static GetAllUserAdmin = async (
-        req: Request,
-        res: Response
-    ): Promise<Users[] | any> => {
+    async GetAllUserAdmin(req: Request, res: Response): Promise<Users[] | any> {
         try {
             const usersRepository = AppDataSource.getRepository(Users)
             const AllUser: Users[] = await usersRepository.find()
@@ -69,7 +60,7 @@ export class UsersController {
         }
     }
 
-    static UpdateUser = async (req: Request, res: Response): Promise<any> => {
+    async UpdateUser(req: Request, res: Response): Promise<any> {
         try {
             const userId = Number(res.locals.jwtPayload.id)
             const data: Users = req.body
@@ -103,10 +94,7 @@ export class UsersController {
         }
     }
 
-    static AdminDeleteUser = async (
-        req: Request,
-        res: Response
-    ): Promise<void> => {
+    async AdminDeleteUser(req: Request, res: Response): Promise<void> {
         const listId = req.body.userId
         try {
             const usersRepository = AppDataSource.getRepository(Users)

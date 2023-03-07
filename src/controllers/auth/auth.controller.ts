@@ -8,10 +8,7 @@ import config from 'config'
 import { SendMail } from '../mailer/sendMail.controller'
 import HttpException from '../../utils/HttpException'
 export class AuthController {
-    static Register = async (
-        req: Request,
-        res: Response
-    ): Promise<AuthRegister | any> => {
+    async Register(req: Request, res: Response): Promise<AuthRegister | any> {
         const data: AuthRegister = req.body
         try {
             const auth: AuthController = new AuthController()
@@ -33,10 +30,7 @@ export class AuthController {
         }
     }
 
-    static Login = async (
-        req: Request,
-        res: Response
-    ): Promise<Users | any> => {
+    async Login(req: Request, res: Response): Promise<Users | any> {
         const data: AuthLogin = req.body
         try {
             const auth: AuthController = new AuthController()
@@ -78,7 +72,7 @@ export class AuthController {
         }
     }
 
-    static Logout = async (req: Request, res: Response) => {
+    async Logout(req: Request, res: Response) {
         res.clearCookie('access_token').status(200).json('Logout success')
     }
 
@@ -93,12 +87,10 @@ export class AuthController {
         return user
     }
 
-    static ForgotPassword = async (
-        req: Request,
-        res: Response
-    ): Promise<any> => {
+    async ForgotPassword(req: Request, res: Response): Promise<any> {
         const email = req.body.email
         try {
+            const sendMail = new SendMail()
             const usersRepository = AppDataSource.getRepository(Users)
             let user = await usersRepository.findOne({
                 where: { email: email },
@@ -119,7 +111,7 @@ export class AuthController {
                     password: hashed,
                 })
                 if (updated) {
-                    await SendMail.SendMailForgotPassword({
+                    await sendMail.SendMailForgotPassword({
                         email,
                         randomNewPasword,
                     })

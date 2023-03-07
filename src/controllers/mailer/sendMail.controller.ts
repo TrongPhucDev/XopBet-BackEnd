@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import nodemailer from 'nodemailer'
 import config from 'config'
 export class SendMail {
-    static SendMailForgotPassword = async (data: any) => {
+    async SendMailForgotPassword(data: any) {
         console.log(data)
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',

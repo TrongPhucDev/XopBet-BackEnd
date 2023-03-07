@@ -7,10 +7,7 @@ import { AppDataSource } from './../../utils/data-source'
 import { Request, Response } from 'express'
 
 export class OrderController {
-    static AddPetsForOrderUser = async (
-        req: Request,
-        res: Response
-    ): Promise<any> => {
+    async AddPetsForOrderUser(req: Request, res: Response): Promise<any> {
         const recipientId: number = Number(res.locals.jwtPayload.id)
         const cartId: number = req.body
         try {
@@ -47,10 +44,10 @@ export class OrderController {
         }
     }
 
-    static GetPetsForUserOrder = async (
+    async GetPetsForUserOrder(
         req: Request,
         res: Response
-    ): Promise<Pets[] | any> => {
+    ): Promise<Pets[] | any> {
         const userId = Number(res.locals.jwtPayload.id)
         try {
             const orderRepository = AppDataSource.getRepository(Order)
@@ -76,10 +73,7 @@ export class OrderController {
         }
     }
 
-    public UpdateStatusOrder = async (
-        req: Request,
-        res: Response
-    ): Promise<any> => {
+    async UpdateStatusOrder(req: Request, res: Response): Promise<any> {
         const data = req.body
         const userId = Number(res.locals.jwtPayload.id)
         try {
@@ -115,7 +109,7 @@ export class OrderController {
         return Number(transactionCode)
     }
 
-    static GetAllOrders = async (req: Request, res: Response): Promise<any> => {
+    async GetAllOrders(req: Request, res: Response): Promise<any> {
         try {
             const orderRepository = AppDataSource.getRepository(Order)
             const orders = await orderRepository.find()

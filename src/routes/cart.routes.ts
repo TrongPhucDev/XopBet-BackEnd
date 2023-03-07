@@ -3,7 +3,8 @@ import { ShoppingCartController } from '../controllers/cart/shoppingCart.control
 import { VerifyToken } from '../middleware/verifyToken.middleware'
 
 const router = express.Router()
-router.get('/', VerifyToken, ShoppingCartController.GetAllProductInCart)
-router.post('/addToCart/:id', VerifyToken, ShoppingCartController.AddToCart)
-router.delete('/delete', VerifyToken, ShoppingCartController.DeletePostFromCart)
+const cart = new ShoppingCartController()
+router.get('/', VerifyToken, cart.GetAllProductInCart)
+router.post('/addToCart/:id', VerifyToken, cart.AddToCart)
+router.delete('/delete', VerifyToken, cart.DeletePostFromCart)
 export default router

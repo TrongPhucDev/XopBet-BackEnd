@@ -4,18 +4,17 @@ import { UsersController } from '../controllers/users/users.controller'
 import { VerifyToken } from '../middleware/verifyToken.middleware'
 
 const router = express.Router()
-router.get('/getme', VerifyToken, UsersController.GetMe)
-router.get('/all', VerifyToken, UsersController.GetAllPetPost)
-router.get(
-    '/',
-    [VerifyToken, CheckAuthorization],
-    UsersController.GetAllUserAdmin
-)
+
+const users = new UsersController()
+
+router.get('/getme', VerifyToken, users.GetMe)
+router.get('/all', VerifyToken, users.GetAllPetPost)
+router.get('/', [VerifyToken, CheckAuthorization], users.GetAllUserAdmin)
 router.delete(
     '/admin-delete',
     [VerifyToken, CheckAuthorization],
-    UsersController.AdminDeleteUser
+    users.AdminDeleteUser
 )
-router.patch('/update', VerifyToken, UsersController.UpdateUser)
-// router.get('/', VerifyToken, UsersController.GettAllProductInCart)
+router.patch('/update', VerifyToken, users.UpdateUser)
+// router.get('/', VerifyToken, users.GettAllProductInCart)
 export default router

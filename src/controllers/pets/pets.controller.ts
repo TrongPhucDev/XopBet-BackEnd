@@ -4,10 +4,7 @@ import { AppDataSource } from '../../utils/data-source'
 import HttpException from '../../utils/HttpException'
 export class PetsController {
     // create new post
-    static CreatePost = async (
-        req: Request,
-        res: Response
-    ): Promise<Pets | any> => {
+    async CreatePost(req: Request, res: Response): Promise<Pets | any> {
         const data = req.body
         const userId = Number(res.locals.jwtPayload.id)
 
@@ -35,10 +32,7 @@ export class PetsController {
         }
     }
 
-    static UpdatePost = async (
-        req: Request,
-        res: Response
-    ): Promise<String | any> => {
+    async UpdatePost(req: Request, res: Response): Promise<String | any> {
         const data = req.body
         const petId = Number(req.params.id)
         const userId = Number(res.locals.jwtPayload.id)
@@ -64,7 +58,7 @@ export class PetsController {
         }
     }
 
-    static DeletePost = async (req: Request, res: Response): Promise<void> => {
+    async DeletePost(req: Request, res: Response): Promise<void> {
         const userId = Number(res.locals.jwtPayload.id)
         const postId = Number(req.params.id)
         try {
@@ -82,10 +76,7 @@ export class PetsController {
         }
     }
 
-    static GetAll = async (
-        req: Request,
-        res: Response
-    ): Promise<Pets[] | any> => {
+    async GetAll(req: Request, res: Response): Promise<Pets[] | any> {
         const page = Number(req.params.page as any) || 1
         const take: number = 100
 
@@ -110,10 +101,10 @@ export class PetsController {
         }
     }
 
-    // static GetItemBySearch = async (
+    //  GetItemBySearch = async (
     //     req: Request,
     //     res: Response
-    // ): Promise<Pets[] | any> => {
+    // ): Promise<Pets[] | any>  {
     //     let { searchQuery }: any = req.query
     //     try {
     //         searchQuery = new RegExp(searchQuery, 'i')

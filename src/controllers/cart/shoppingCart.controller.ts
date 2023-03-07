@@ -6,7 +6,7 @@ import { Users } from '../../entity/users.entity'
 import HttpException from '../../utils/HttpException'
 
 export class ShoppingCartController {
-    static AddToCart = async (req: Request, res: Response): Promise<any> => {
+     async AddToCart (req: Request, res: Response): Promise<any> {
         const petId: number = Number(req.params.id)
         const userId: number = Number(res.locals.jwtPayload.id)
         console.log('Check user id:', userId)
@@ -45,10 +45,10 @@ export class ShoppingCartController {
         }
     }
 
-    static GetAllProductInCart = async (
+     async GetAllProductInCart (
         req: Request,
         res: Response
-    ): Promise<Pets | any> => {
+    ): Promise<Pets | any> {
         const userId: number = Number(res.locals.jwtPayload.id)
         try {
             const cartRepository: ShoppingCart | any =
@@ -70,10 +70,10 @@ export class ShoppingCartController {
         }
     }
 
-    static DeletePostFromCart = async (
+     async DeletePostFromCart (
         req: Request,
         res: Response
-    ): Promise<any> => {
+    ): Promise<any> {
         const userId: number = Number(res.locals.jwtPayload.id)
         const data = req.body
         // console.log(data)

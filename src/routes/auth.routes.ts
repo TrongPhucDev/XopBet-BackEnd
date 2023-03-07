@@ -1,16 +1,12 @@
 import express from 'express'
 import { AuthController } from '../controllers/auth/auth.controller'
-import { check, body, validationResult } from 'express-validator'
 
 const router = express.Router()
-router.post('/register', AuthController.Register)
-router.post(
-    '/login',
-    [body('email').not().isEmail().isEmpty(), body('password').not().isEmpty()],
-    AuthController.Login
-)
+const auth = new AuthController()
+router.post('/register', auth.Register)
+router.post('/login', auth.Login)
 
-router.post('/logout', AuthController.Logout)
-router.post('/forgot', AuthController.ForgotPassword)
+router.post('/logout', auth.Logout)
+router.post('/forgot', auth.ForgotPassword)
 
 export default router

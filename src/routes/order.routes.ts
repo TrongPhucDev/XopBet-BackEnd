@@ -3,6 +3,7 @@ import { VerifyToken } from '../middleware/verifyToken.middleware'
 import { OrderController } from '../controllers/order/order.controrller'
 
 const router = express.Router()
-router.post('/addToOrder', VerifyToken, OrderController.AddPetsForOrderUser)
-router.get('/', VerifyToken, OrderController.GetPetsForUserOrder)
+const order = new OrderController()
+router.post('/addToOrder', VerifyToken, order.AddPetsForOrderUser)
+router.get('/', VerifyToken, order.GetPetsForUserOrder)
 export default router
